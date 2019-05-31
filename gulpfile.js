@@ -6,8 +6,8 @@ const browserSync = require('browser-sync').create();
 
 function style(){
     // 1. where is my scss 
-    return gulp.src('./resources/scss/*.scss')
-    .pipe(sass()).pipe(gulp.dest('./resources/css'))
+    return gulp.src('./resources/scss/main.scss')
+    .pipe(sass()).pipe(gulp.dest('./templates'))
     .pipe(browserSync.stream());
 }
 
@@ -15,10 +15,10 @@ function style(){
 function watch(){
     browserSync.init({
         server: {
-            baseDir: './templates'
+            baseDir: './'
         }
     });
-    gulp.watch('./resources/scss/*.scss', style);
+    gulp.watch('./resources/scss/**/*.scss', style);
     gulp.watch('./*.html').on('change', browserSync.reload);
     gulp.watch('./resources/js/*.js').on('change', browserSync.reload);
 }
