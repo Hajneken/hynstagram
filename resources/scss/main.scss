@@ -1,3 +1,61 @@
+// VARIABLES
+@import "/base/variables";
+
+// Importing Bootstrap (https://getbootstrap.com/docs/4.0/getting-started/theming/)
+@import "/base/bootstrap";
+
+// BASE
+@import "/base/fonts";
+@import "/base/mixins";
+@import "/base/typography";
+@import "/base/rwd-identifier";
+@import "/base/animation-anchors";
+@import "/base/js-support";
+
+// LAYOUT
+@import "/layout/layout";
+
+// COMPONENTSs
+
+
+// ============
+// Default Components
+// ============
+//@import "/components/wysiwyg-content";
+//@import "/components/noscript-warning";
+//@import "/components/pagination";
+//@import "/components/breadcrumb";
+//@import "/components/buttons";
+//@import "/components/dhtml-number";
+//@import "/components/alerts";
+//@import "/components/password-toggle";
+//@import "/components/media-list";
+//@import "/components/list-files";
+//@import "/components/file-type";
+//@import "/components/tooltip";
+//@import "/components/forms/forms";
+//@import "../../../../node_modules/select2/dist/css/select2.css";
+//@import "/components/select2-custom";
+//@import "/components/list-select";
+//@import "/components/newsletter-unsubscription";
+//@import "/components/phone-number";
+//@import "/components/universal-preloader";
+//@import "/components/edeeshop-popup";
+//@import "/components/highslide";
+//@import "/components/header/header";
+//@import "/components/header/header-order-wizard";
+//@import "/components/main-menu";
+//@import "/components/greedy-menu";
+//@import "/components/footer/footer";
+//@import "/components/fulltext-autocomplete";
+//@import "/components/registration/registration";
+
+// SHAME
+// @import "/shame/shame";
+
+
+
+
 .svg-icon{    
     width: 3rem;
     height: 3rem;
