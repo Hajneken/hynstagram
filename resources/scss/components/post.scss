@@ -1,0 +1,53 @@
+.posts-wrap{
+    .row:first-child{
+        margin-top: 0;
+    }
+    .row{
+        margin-top: -10%;
+    }
+    .row:nth-child(2n){
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+.post{
+    max-height: 80rem;
+    width: 100%;
+}
+
+.post__img-wrap{
+    width: 100%;
+    height: 80%;
+}
+
+.post__img{
+    @include size(100%);
+    margin-bottom: 1rem;
+}
+
+.post__meta{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post__author{
+    margin: 0;
+}
+
+.post__vote-wrap{
+    display: flex;
+    align-items: center;
+}
+
+.post__votes{
+    margin: 0;
+    line-height: 1;
+}
+
+.btn--upvote{
+    line-height: 1;
+    padding: 1rem;
+    margin-left: 0.5rem;
+}
+
