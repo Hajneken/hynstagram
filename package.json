@@ -2,5 +2,16 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "yarn": "^1.16.0"
+  },
+  "name": "hynstagram",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Hajneken/hynstagram.git",
+  "author": "Hynek Zemanec <zemanech@yahoo.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.26.5",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.0.2"
   }
 }
