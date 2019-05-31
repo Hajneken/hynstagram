@@ -6952,6 +6952,14 @@ a.text-dark:hover, a.text-dark:focus {
 body {
   position: relative; }
 
+.text-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem; }
+
+.text {
+  max-width: 30rem; }
+
 .navigation {
   position: sticky;
   top: 0;
@@ -6984,6 +6992,10 @@ body {
   background-color: #fff; }
   .wrapper--social {
     background: #b621df57; }
+  .wrapper--comment {
+    display: flex;
+    align-items: center;
+    justify-content: space-around; }
 
 .svg-icon {
   width: 2rem;
@@ -7018,3 +7030,84 @@ body {
   background-color: #fff;
   border-color: #32023f;
   box-shadow: 0 0 0 0.2rem #32023f40; }
+
+.divider {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.divider__text {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.431);
+  position: relative; }
+  .divider__text:before {
+    content: '';
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.431);
+    width: 1px;
+    height: 10rem;
+    top: -10rem;
+    left: 50%;
+    transform: translateX(-50%); }
+  .divider__text:after {
+    content: '';
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.431);
+    width: 1px;
+    height: 10rem;
+    bottom: -10rem;
+    left: 50%;
+    transform: translateX(-50%); }
+
+.form--post {
+  display: flex;
+  align-items: center; }
+
+.btn--post {
+  line-height: 1;
+  height: 80%; }
+
+.posts-wrap .row:first-child {
+  margin-top: 0; }
+
+.posts-wrap .row {
+  margin-top: -10%; }
+
+.posts-wrap .row:nth-child(2n) {
+  display: flex;
+  justify-content: flex-end; }
+
+.post {
+  max-height: 80rem;
+  width: 100%; }
+
+.post__img-wrap {
+  width: 100%;
+  height: 80%; }
+
+.post__img {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 1rem; }
+
+.post__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+.post__author {
+  margin: 0; }
+
+.post__vote-wrap {
+  display: flex;
+  align-items: center; }
+
+.post__votes {
+  margin: 0;
+  line-height: 1; }
+
+.btn--upvote {
+  line-height: 1;
+  padding: 1rem;
+  margin-left: 0.5rem; }

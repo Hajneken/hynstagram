@@ -8,4 +8,10 @@
   &--social{
     background: #b621df57;
   }
+  
+  &--comment{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
 }
