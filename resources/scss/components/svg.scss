@@ -1,0 +1,10 @@
+.svg-icon{    
+    @include size(2rem);
+    &--social{
+        @include size(100%);
+        fill: white;
+    }
+}
+
+
+

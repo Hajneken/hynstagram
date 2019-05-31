@@ -1,0 +1,23 @@
+.navigation{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-bottom: 3rem;
+}
+
+.navbar{
+    border-radius: 2rem;
+}
+
+.navbar-brand{
+    transform: scale(1);
+    transition: all 200ms ease-in;
+    &:hover{ 
+        transform: scale(1.1);
+        transition: all 200ms ease-in;
+        .svg-icon{
+            fill: #32023f;
+        }
+        
+    }
+}

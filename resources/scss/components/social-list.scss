@@ -1,0 +1,19 @@
+.social-list{
+    @include cleanList();
+    display: flex;
+    justify-content: space-between;
+}
+
+.social-list__item{
+    @include size(2rem);
+    transform: scale(1);
+    transition: all 200ms ease-in;
+    &:hover{ 
+        transform: scale(1.1);
+        transition: all 200ms ease-in;
+    }
+       
+}
+.social-list__link{
+    @include size(100%);
+}
