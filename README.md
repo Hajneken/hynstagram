@@ -17,5 +17,21 @@ The logic of the app is written mainly in PHP, using MySQL database as a storage
 - PHP 
 - MySQL 
 - ES6
-- yarn 
-- Bootstrap 
+
+### Tools 
+
+Front-end tools: 
+* Gulp
+* SCSS 💘 (CSS preprocesor)
+* Bootstrap 
+
+Server simulated with *browser-sync*
+
+Also using `yarn` as a package manager
+
+## Start project
+
+1) install *yarn*
+2) run `yarn` in your root directory
+3) run `gulp watch` to serve your files 
+4) 🎉 you are set up 🎉
