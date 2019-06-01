@@ -1,3 +1,4 @@
+<h2 class="header">Create a new topic!</h2>
 <form class="form">
     <div class="form-group">
         <label for="topicName">Name</label>

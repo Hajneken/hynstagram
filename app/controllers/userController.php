@@ -1,8 +1,10 @@
 <?php
-$user = false; 
-$navProfile = '';
+// user Signed In?
+$user = true; 
+// navigation
 $linkPath = './sign.php';
 $userStatus = 'Register / Sign In';
+$navProfile = '';
 
 if ($user){
     $userStatus = 'Sign Off';
