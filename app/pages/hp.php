@@ -3,6 +3,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 mb-5">
+                    <?php 
+                    if(isset($_SESSION['successMessage'])){
+                            echo '<div class="alert alert-success" role="alert">'.$_SESSION['successMessage'].'</div>';
+                            unset($_SESSION['successMessage']);
+                        }
+                        ?>
                         <h1 class="title text-center">Hynstagram</h1>
                     </div>
                 </div>

@@ -14,6 +14,32 @@
     align-items: center;
 }
 
+@media screen and (max-width: 991px){
+    .divider__text{
+        &:before{
+            content: '';
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.431);
+            width: 1px;
+            height: 10rem;
+            top: -10rem;
+            left: -8rem;
+            transform: rotate(90deg);
+            
+        }
+        &:after{
+            content: '';
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.431);
+            width: 1px;
+            height: 10rem;
+            bottom: -10rem;
+            left: -8rem;
+            transform: rotate(90deg);
+        }
+    }
+}
+
 .divider__text{
     font-weight: bold;
     color: rgba(0, 0, 0, 0.431);

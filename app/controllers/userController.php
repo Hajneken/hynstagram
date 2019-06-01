@@ -16,9 +16,10 @@ if(isset($_SESSION['isLoggedIn'])){
 } else { 
     //  user is logged out
     $userStatus = 'Log In / Register';
-    $linkPath = './controllers/login.php';
+    $linkPath = './sign.php';
     $navProfile = '';
 }
 
+// ./controllers/login.php
 
 ?> 
