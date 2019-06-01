@@ -9,7 +9,7 @@
             <ul class="navbar-nav">
                 <?php echo $navProfile ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $linkPath ?>"><?php echo $userStatus?></a>
+                    <a class="nav-link" href="<?php echo $linkPath ?>"><?php echo $userStatus;?></a>
                 </li>
             </ul>
         </div>

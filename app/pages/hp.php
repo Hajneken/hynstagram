@@ -33,7 +33,13 @@
                     </div>
                     <div class="col-12 col-md-12 col-lg-6">
                         <div class="wrapper">
-                            <?php include './forms/newTopic.php'?>
+                            <?php 
+                            if(isset($_SESSION['isLoggedIn'])){
+                                include './forms/newTopic.php'; 
+                            } else { 
+                                echo '<h2 class="header">Sign in to kick off a new topic!</h2>';
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

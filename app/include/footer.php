@@ -73,5 +73,5 @@
             </div>
         </div>
     </div>
-    <?php include './credits.php'?>
+    <?php include './include/credits.php'?>
 </footer>
