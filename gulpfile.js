@@ -7,7 +7,7 @@ const browserSync = require('browser-sync').create();
 function style(){
     // 1. where is my scss 
     return gulp.src('./resources/scss/main.scss')
-    .pipe(sass()).pipe(gulp.dest('./templates'))
+    .pipe(sass()).pipe(gulp.dest('./app'))
     .pipe(browserSync.stream());
 }
 
