@@ -17,6 +17,19 @@ function insertTopicInDb(PDO $db, $name, $desctiption, $isPublic)
     ]);
 }
 
+function createTopicDirectory($name, $topicBoilerplate){
+    // create directory
+    $dir = mkdir('./topics/topic'.$name);
+    // create file
+    $file = fopen($dir.'/'.'topic'.$name.'.php', 'w');
+    // write to file
+    fwrite($file, $topicBoilerplate);
+    // close the file
+    fclose($file);
+    
+    return './topics/topic'.$name.'/'.'topic'.$name.'.php';
+}
+
 function checkForDuplicateTopic(PDO $db, $topic)
 {
     $query = $db->prepare('SELECT * FROM Topics WHERE name=:name LIMIT 1;');
@@ -44,9 +57,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         insertTopicInDb($db, stringCleaner($topicName), stringCleaner($topicDescription), 1);
     }
     insertTopicInDb($db, stringCleaner($topicName), stringCleaner($topicDescription), 0);
+    
+    
 }
 
-$_SESSION['successMessage'] .= 'Your new topic ' . $name . 'was born 👶';
+
+
+$_SESSION['successMessage'] .= 'Your new topic named ' . $topicName . ' was born 👶. Check it out <a href="'.createTopicDirectory(stringCleaner($topicName), include "./topicBoilerplate.php").'">Here</a>!';
 header("location:../index.php");
 exit();
 
