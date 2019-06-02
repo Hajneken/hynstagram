@@ -4,6 +4,23 @@
 require '../db/connectDb.php';
 require './authenticationHelpers.php';
 
+$topicBoiler = '<?php
+include "./controllers/userController.php"
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<?php include "./include/head.php" ?>
+
+<body>
+    <?php include "./include/nav.php" ?>
+    
+    <?php include "./include/footer.php" ?>
+    <?php include "./include/scripts.php" ?>
+</body>
+
+</html>';
+
 session_start();
 
 function insertTopicInDb(PDO $db, $name, $desctiption, $isPublic)
@@ -19,7 +36,7 @@ function insertTopicInDb(PDO $db, $name, $desctiption, $isPublic)
 
 function createTopicDirectory($name, $topicBoilerplate){
     // create directory
-    $dir = mkdir('./topics/topic'.$name);
+    $dir = mkdir('../topics/topic'.$name,0777,true);
     // create file
     $file = fopen($dir.'/'.'topic'.$name.'.php', 'w');
     // write to file
@@ -62,8 +79,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 
+// $_SESSION['successMessage'] .= 'Your new topic named ' . $topicName . ' was born 👶. Check it out <a href="'.createTopicDirectory(stringCleaner($topicName), include "./topicBoilerplate.php").'">Here</a>!';
 
-$_SESSION['successMessage'] .= 'Your new topic named ' . $topicName . ' was born 👶. Check it out <a href="'.createTopicDirectory(stringCleaner($topicName), include "./topicBoilerplate.php").'">Here</a>!';
+$_SESSION['successMessage'] .= 'Your new topic named ' . $topicName . ' was born 👶. Check it out <a href="'.createTopicDirectory(stringCleaner($topicName), $topicBoiler).'">Here</a>!';
+
 header("location:../index.php");
 exit();
 

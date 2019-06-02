@@ -73,10 +73,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ]);
 
         // redirect to the ok site
-        $_SESSION['successMessage'] .= 'Welcome to the Community! 💘';
+        $_SESSION['successMessage'] .= 'Welcome to the Community! 💘 Now it is time for your very first login, excited? Because we are! 🤩';
+        
         header("location:../index.php");
         exit();
-        // header("location:https://www.seznam.cz/");
     } else {
         $_SESSION['errorMessage'] .= '💔 Dare to try again? 💪';
         header("location:../sign.php");
