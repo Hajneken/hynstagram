@@ -8,6 +8,10 @@ session_start();
 
 function checkEmail(PDO $db, $email)
 {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['errorMessage'] .= 'This does not look like an email!<br><hr>';
+        return false;
+    }
     // check if user exists against database
     $query = $db->prepare('SELECT * FROM Users WHERE email=:email LIMIT 1;');
     // execute query

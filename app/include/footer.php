@@ -56,19 +56,7 @@
             </div>
             <div class="col-12 col-lg-6">
                 <div class="message-wrap">
-                    <h3 class="subheader mb-4 text-center text-white">Have something on your mind?</h3>
-                    <form class="form">
-                        <div class="form-group">
-                            <label class="text-white" for="strangerEmail">Email</label>
-                            <input type="email" class="form-control" id="strangerEmail" aria-describedby="Your email address..." placeholder="Enter your email...">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div class="form-group">
-                            <label class="text-white" for="strangerMessage">Your message</label>
-                            <textarea class="form-control" id="topicDescription" rows="3" placeholder="Share your thoughts with us ..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send</button>
-                    </form>
+                    <?php include './forms/mailForm.php'; ?>
                 </div>
             </div>
         </div>
