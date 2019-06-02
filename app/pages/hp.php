@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="text-container">
-                            <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum blanditiis dolore aperiam corrupti labore pariatur veniam distinctio maxime quis dolorem voluptatem veritatis, odit laboriosam nihil, sed earum deserunt sapiente sit.</p>
+                            <p class="text">A place where only images are a valid way of communication. 🎨 This fun little project has been written as a requirement for the course 4iz278 - Web Applications (2019). Ipsum blanditiis dolore aperiam corrupti labore pariatur veniam distinctio sit.</p>
                         </div>
                     </div>
                 </div>

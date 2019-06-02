@@ -7,6 +7,7 @@
                     <h1 class="title text-center">Island</h1>
                 </div>
                 <div class="col-8">
+                    <!-- include db post description here -->
                     <p class="text">Intro Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, quidem
                         harum temporibus reprehenderit quia voluptas incidunt. Impedit accusantium veniam nobis
                         dignissimos numquam quaerat magni reprehenderit, blanditiis tempora? Atque, suscipit in.</p>
@@ -43,7 +44,7 @@
                 <div class="col-12 col-md-6">
                     <div class="wrapper">
                         <div class="post">
-                            <div class="post__img-wrap"><img src="../resources/img/island/618974-top_foto1-5cq0r.jpg" alt="Iceland picture 1" class="post__img"></div>
+                            <div class="post__img-wrap"><img src="https://static.vinepair.com/wp-content/uploads/2017/06/iceland-summer-solstice-inside.jpg" alt="Iceland picture 1" class="post__img"></div>
                             <div class="post__meta">
                                 <div class="post__autor-wrap">
                                     <p class="post__author">Lorema Ipsumová</p>
@@ -79,7 +80,7 @@
                 <div class="col-12 col-md-6">
                     <div class="wrapper">
                         <div class="post">
-                            <div class="post__img-wrap"><img src="../resources/img/island/shutterstock_527809705.jpg" alt="Iceland picture 1" class="post__img"></div>
+                            <div class="post__img-wrap"><img src="https://www.telegraph.co.uk/content/dam/Travel/2019/March/Kirkjufell-iStock-959966730.jpg?imwidth=450" alt="Iceland picture 1" class="post__img"></div>
                             <div class="post__meta">
                                 <div class="post__autor-wrap">
                                     <p class="post__author">Lorema Ipsumová</p>
@@ -115,7 +116,7 @@
                 <div class="col-12 col-md-6">
                     <div class="wrapper">
                         <div class="post">
-                            <div class="post__img-wrap"><img src="../resources/img/island/Island-03-Hverir.jpg" alt="Iceland picture 1" class="post__img"></div>
+                            <div class="post__img-wrap"><img src="https://cdn-04.independent.ie/life/travel/article34985584.ece/85dd6/AUTOCROP/w620/iceland.jpg" alt="Iceland picture 1" class="post__img"></div>
                             <div class="post__meta">
                                 <div class="post__autor-wrap">
                                     <p class="post__author">Lorema Ipsumová</p>
