@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-12 col-lg-5">
                     <div class="wrapper">
-                        <?php include './forms/signIn.php' ?>
+                        <?php include './forms/loginForm.php' ?>
                     </div>
                 </div>
             </div>

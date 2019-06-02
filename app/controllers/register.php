@@ -2,16 +2,9 @@
 
 // database connection 
 require '../db/connectDb.php';
+require './authenticationHelpers.php';
 
 session_start();
-
-function stringCleaner($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
 
 function checkEmail(PDO $db, $email)
 {
@@ -24,16 +17,15 @@ function checkEmail(PDO $db, $email)
 
     if ($user) {
         $_SESSION['errorMessage'] .= 'Submitted email is already registered!<br><hr>';
-        header("location:../sign.php");
         return false;
     }
-
     return true;
 }
 
 function checkNickname(PDO $db, $nickname)
 {
-    $nickname = $_POST['newUserNickname'];
+    // $nickname = $_POST['newUserNickname'];
+    
     // check if user exists against database
     $query = $db->prepare('SELECT * FROM Users WHERE nickname=:nickname LIMIT 1;');
     // execute query
@@ -43,7 +35,6 @@ function checkNickname(PDO $db, $nickname)
 
     if ($user) {
         $_SESSION['errorMessage'] .= 'Submitted nickname is already registered!<br><hr>';
-        header("location:../sign.php");
         return false;
     }
 
@@ -57,10 +48,9 @@ function validatePassword($pswd, $pswdCheck)
             return true;
         }
         $_SESSION['errorMessage'] .= 'Your password is too weak, please help us to make a world a safer palce and choose password at least 8 characters long.<br><hr>';
-        header("location:../sign.php");
         return false;
     }
-
+    $_SESSION['errorMessage'] .= 'Your passwords do not match!<br><hr>';
     return false;
 }
 
@@ -81,13 +71,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ]);
 
         // redirect to the ok site
+        $_SESSION['successMessage'] .= 'Welcome to the Community! 💘';
         header("location:../index.php");
+        exit();
+        // header("location:https://www.seznam.cz/");
     } else {
         $_SESSION['errorMessage'] .= '💔 Dare to try again? 💪';
         header("location:../sign.php");
+        exit();
     }
     // redirect to the ok site
     $_SESSION['successMessage'] .= 'Welcome to the Community! 💘';
     // redirect to the ok site
     header("location:../index.php");
+    
+    // TODO Login the user 
 }
+
+?>

@@ -9,12 +9,12 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <div class="wrapper">
+                    <div class="wrapper">                      
                         <h2 class="header">User Details:</h2>
                         <ul class="user-info">
-                            <li class="user-info__item">Nickname: <span class="font-weight-bold">Lorry</span> </li>
-                            <li class="user-info__item">Mail: <span class="font-weight-bold">lorem@ipsum.cz</span></li>
-                            <li class="user-info__item">Posts: <span class="font-weight-bold">lorem@ipsum.cz</span></li>
+                            <li class="user-info__item">Nickname: <span class="font-weight-bold"><?php echo $_SESSION['nickname'];?></span> </li>
+                            <li class="user-info__item">Mail: <span class="font-weight-bold"><?php echo $_SESSION['email'];?></span></li>
+                            <li class="user-info__item">Posts: <span class="font-weight-bold">WARNING</span></li>
                         </ul>
                     </div>
                 </div>

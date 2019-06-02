@@ -1,10 +1,6 @@
     <?php
     
-    
-     
-    
-    // $_SESSION[] = 'lolek'
-    // if(!empty($_POST) && (@$_POST))
+
     
     ?>
     <h2 class="header">Change information</h2>

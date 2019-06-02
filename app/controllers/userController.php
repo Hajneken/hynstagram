@@ -20,6 +20,5 @@ if(isset($_SESSION['isLoggedIn'])){
     $navProfile = '';
 }
 
-// ./controllers/login.php
 
 ?> 
