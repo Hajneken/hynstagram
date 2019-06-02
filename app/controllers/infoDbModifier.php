@@ -8,27 +8,15 @@ session_start();
 
 // db connection 
 
-function updateData(PDO $db)
+function updateData(PDO $db, $data, $dbColumn)
 {
-    // $query = $db->prepare('SELECT * FROM Users WHERE nickname=:nickname LIMIT 1;');
-    // // execute query
-    // $query->execute([':nickname' => stringCleaner($nickname)]);
-    // // fetch query
-    // $user = $query->fetchObject();
-
-    // $db->prepare('INSERT INTO uzivatele (email, heslo) VALUES (:email,:heslo);');
-
-    // $query->execute([
-    //     ':email' => $_POST['email'],
-    //     ':heslo' => password_hash($_POST['heslo'], PASSWORD_DEFAULT)
+    $query = $db->prepare('UPDATE Users SET '.$dbColumn.'=:'.$dbColumn.' WHERE userID=:userID LIMIT 1;');
+    $query->execute([
+        ':'.$dbColumn => stringCleaner($data),
+        ':userID'=> $_SESSION['userID']
+    ]);
 }
 
-// $query = $db->prepare('SELECT * FROM Users WHERE id=:id LIMIT 1;');
-    // $query->execute([':id' => $_SESSION['id']]);
-    // // fetch query
-    // $userObj = $query->fetchObject();
-    // return 
-    
 // check passwords are the same
 
 function isPasswordIdentical($first, $second){
@@ -37,19 +25,14 @@ function isPasswordIdentical($first, $second){
 
 // verify that user knows his old password
 function verifyOldPassword($oldPswd){
-    // return password_hash($oldPswd, PASSWORD_DEFAULT) === $_SESSION['password'];
-    // return password_verify(password_hash($oldPswd, PASSWORD_DEFAULT), $_SESSION['password']);
     return password_verify($oldPswd, $_SESSION['password']);
 }
 
 // check if password already exists in DB
 // return true if already exists
 function passwordExists($newPswd){    
-    // return password_hash($newPswd, PASSWORD_DEFAULT) === $_SESSION['password'];
-    // return password_verify(password_hash($newPswd, PASSWORD_DEFAULT), $_SESSION['password']);
     return password_verify($newPswd, $_SESSION['password']);
 }
-
 
 // hash, salt and insert new Password to Db
 function updatePassword(PDO $db, $newPswd)
@@ -77,11 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // get $user object
     $user = checkUserId($db, $_SESSION['userID']);
     // get form values
-    $newValue = $_POST[$_SESSION['modify'].'New'];
+    $newValue = stringCleaner($_POST[$_SESSION['modify'].'New']);
     
     if($_SESSION['modify'] === 'password'){
-        $oldPassword = $_POST['oldPassword'];
-        $newValue2 = $_POST[$_SESSION['modify'].'New2'];
+        $oldPassword = stringCleaner($_POST['oldPassword']);
+        $newValue2 = stringCleaner($_POST[$_SESSION['modify'].'New2']);
         
         // user know his old password
         if(!verifyOldPassword($oldPassword)){
@@ -111,8 +94,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['successMessage'] .= 'Your password was changed! ✅ <br><hr>';
         header("location:../profile.php");
         exit();
+    } else {
+        
+        // 1. check if data exists
+        if($newValue === $_SESSION[$_SESSION['modify']]){
+            $_SESSION['errorMessage'] .= 'Please enter new data. (Otherwise what is the point right? 🤓)<br><hr>';
+            header("location:../userDataChange.php");
+            exit();
+        }
+        // update data in database
+        updateData($db, $newValue, $_SESSION['modify']);
+        // update session data
+        $modified = $_SESSION['modify'];
+        // session_destroy();
+        sessionSetter($user);
+        $_SESSION['successMessage'] .= 'Your '. $modified.' was changed! ✅ <br><hr> Changes will be available after next login.';
+        header("location:../profile.php");
+        exit();
     }
-    
 }
 
 header("HTTP/1.1 404 Not Found");

@@ -24,15 +24,19 @@ if($_SESSION['modify']==='password'){
  <button type="submit" class="btn btn-primary">Submit</button>
 </form>';
 } else {
+    $type = 'text';
     if (isset($_SESSION['errorMessage'])) {
         echo '<div class="alert alert-danger" role="alert"><h3 class="subheader">Dang! 😢</h3>' . $_SESSION['errorMessage'] . '</div>';
         unset($_SESSION['errorMessage']);
+    }
+    if ($_SESSION['modify'] === 'email'){
+        $type = 'email';
     }
     echo '<h2>Current '.$_SESSION['modify'].' value: <span class="font-weight-bold">'.$_SESSION[$_SESSION['modify']].'</span></h2>
     <form class="form" method="post" action="./controllers/infoDbModifier.php">
         <div class="form-group">
             <label for="'.$_SESSION['modify'].'New">New '.$_SESSION['modify'].'</label>
-            <input required type="text" class="form-control" id="'.$_SESSION['modify'].'New" name="'.$_SESSION['modify'].'New" aria-describedby="Your new '.$_SESSION['modify'].'" placeholder="Enter your new '.$_SESSION['modify'].'">
+            <input required type="'.$type.'" class="form-control" id="'.$_SESSION['modify'].'New" name="'.$_SESSION['modify'].'New" aria-describedby="Your new '.$_SESSION['modify'].'" placeholder="Enter your new '.$_SESSION['modify'].'">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>';
