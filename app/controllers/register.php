@@ -24,8 +24,6 @@ function checkEmail(PDO $db, $email)
 
 function checkNickname(PDO $db, $nickname)
 {
-    // $nickname = $_POST['newUserNickname'];
-    
     // check if user exists against database
     $query = $db->prepare('SELECT * FROM Users WHERE nickname=:nickname LIMIT 1;');
     // execute query
@@ -84,8 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['successMessage'] .= 'Welcome to the Community! 💘';
     // redirect to the ok site
     header("location:../index.php");
-    
-    // TODO Login the user 
+     
 }
 
 ?>
