@@ -26,4 +26,20 @@ function saveValuesToSession($postVariable){
     }
 }
 
+function debug($variable, $header){
+    $VAR = var_dump($variable);
+    $_SESSION['errorMessage'] .= $VAR; 
+    header('location:./'.$header);
+    exit();
+}
+
+function sessionMessage($success, $message, $headers){
+    $messageCode = 'errorMessage';
+    if($success){
+        $message = 'successMessage'; 
+    }
+    $_SESSION[$messageCode] .= $message.'<br><hr>';
+        header("location:./$headers");
+}
+
 ?>

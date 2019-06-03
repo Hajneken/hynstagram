@@ -4,24 +4,35 @@
 require '../db/connectDb.php';
 require './authenticationHelpers.php';
 
-$topicBoiler = '<?php
+session_start();
+
+$topicBoilerPlate = '<?php
 include "./controllers/userController.php"
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include "./include/head.php" ?>
+<?php include "../include/head.php" ?>
 
 <body>
-    <?php include "./include/nav.php" ?>
+    <?php include "../include/nav.php" ?>
     
-    <?php include "./include/footer.php" ?>
-    <?php include "./include/scripts.php" ?>
+    <?php include "../include/footer.php" ?>
+    <?php include "../include/scripts.php" ?>
 </body>
 
 </html>';
 
-session_start();
+// $test = stringCleaner(include '../topic.php');
+
+// // debug($variable, $header);
+
+// $_SESSION['errorMessage'] .= $test;
+// header('location:./index.php');
+    
+// exit();
+
+
 
 function insertTopicInDb(PDO $db, $name, $desctiption, $isPublic)
 {
@@ -32,19 +43,40 @@ function insertTopicInDb(PDO $db, $name, $desctiption, $isPublic)
         ':isPublic' => $isPublic,
         ':author' => $_SESSION['userID']
     ]);
+    // DOES NOT WORK!!!!
+    // $dbObj = $query->fetchObject();
+    // $_SESSION['currentTopicId'] = $dbObj->topicId;  
+    // $_SESSION['currentTopicName'] = $dbObj->name;
 }
 
-function createTopicDirectory($name, $topicBoilerplate){
+function fetchInsertedTopicObj(PDO $db, $name){
+    $query = $db->prepare('SELECT * FROM Topics WHERE name=:name LIMIT 1;');
+    $query->execute([':name' => $name]);
+    $topicObj = $query->fetchObject();
+    return $topicObj;
+}
+
+// returns new folder path
+function createTopicDirectory($name){
     // create directory
-    $dir = mkdir('../topics/topic'.$name,0777,true);
-    // create file
-    $file = fopen($dir.'/'.'topic'.$name.'.php', 'w');
+    if(mkdir('../topics/topic_'.$name, 0777, true)){
+        return './topics/topic_'.$name.'/';
+    }
+    // MIGHT MAKE PROBLEMS
+    sessionMessage(false, 'Unable to create a folder!', 'topic.php');
+    exit();
+}
+
+// returns path to the file 🚩❌❌❌🚩
+function createTopicFile($path, $name, $contents){
+    // create file in on a specified url
+    $file = fopen('.'.$path.'topic_'.$name.'.php', 'w');
     // write to file
-    fwrite($file, $topicBoilerplate);
+    fwrite($file, $contents);
     // close the file
     fclose($file);
     
-    return './topics/topic'.$name.'/'.'topic'.$name.'.php';
+    return $path.'topic_'.$name.'.php';
 }
 
 function checkForDuplicateTopic(PDO $db, $topic)
@@ -53,6 +85,7 @@ function checkForDuplicateTopic(PDO $db, $topic)
     $query->execute([':name' => stringCleaner($topic)]);
 
     $topicObj = $query->fetchObject();
+    // if exists then there are duplicates
     if ($topicObj) {
         return true;
     }
@@ -60,12 +93,12 @@ function checkForDuplicateTopic(PDO $db, $topic)
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $topicName = $_POST['topicName'];
-    $topicDescription = $_POST['topicDescription'];
-    $isPublic = $_POST['isPublic'];
-
+    $topicName = stringCleaner($_POST['topicName']);
+    $topicDescription = stringCleaner($_POST['topicDescription']);
+    $isPublic = stringCleaner($_POST['isPublic']);
+    
     if (checkForDuplicateTopic($db, $topicName)) {
-        $_SESSION['errorMessage'] .= 'Sombody was faster than you, a topic with this name already exists!<br><hr>';
+        $_SESSION['errorMessage'] .= 'Sombody was faster than you, a topic '.$topicName.' already exists!<br><hr>';
         header("location:../index.php");
         exit();
     }
@@ -75,13 +108,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     insertTopicInDb($db, stringCleaner($topicName), stringCleaner($topicDescription), 0);
     
+    $dir = createTopicDirectory(stringCleaner($topicName));
     
+    $_SESSION['currentTopicId'] = fetchInsertedTopicObj($db, $topicName)->topicID;
 }
 
+// current topic 🤘 won't work if first time
+$newTopicUrl = './topic.php?id='.$_SESSION['currentTopicId'];
 
-// $_SESSION['successMessage'] .= 'Your new topic named ' . $topicName . ' was born 👶. Check it out <a href="'.createTopicDirectory(stringCleaner($topicName), include "./topicBoilerplate.php").'">Here</a>!';
-
-$_SESSION['successMessage'] .= 'Your new topic named ' . $topicName . ' was born 👶. Check it out <a href="'.createTopicDirectory(stringCleaner($topicName), $topicBoiler).'">Here</a>!';
+$_SESSION['successMessage'] .= 'Your new topic named '.stringCleaner($topicName).' was born 👶. Check it out <a href="'.$newTopicUrl.'">Here</a>!';
 
 header("location:../index.php");
 exit();

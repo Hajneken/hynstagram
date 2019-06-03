@@ -1,3 +1,18 @@
+<?php
+
+require './db/connectDb.php';
+
+function fetchAllRelevantPosts(PDO $db){
+    // to do ORDER BY `votes`
+    $query = $db->prepare('SELECT * FROM Topics LIMIT 5;');
+    $query->execute();
+    $topicsArray = $query->fetchAll();
+    return $topicsArray;
+}
+
+$topicsArray = fetchAllRelevantPosts($db);
+?>
+
 <main class="main-container">
         <section class="section-container">
             <div class="container">
@@ -33,11 +48,21 @@
                         <div class="wrapper">
                             <h2 class="header">Trending topics</h2>
                             <ul class="list-group">
+                                <?php 
+                                
+                                foreach($topicsArray as $key){
+                                    $topicID = $topicsArray[$key]['topicID'];
+                                    $topicName = $topicsArray[$key]['name'];
+                                    // $topicID = $topicsArray[$key]->topicID;
+                                    // $topicName = $topicsArray[$key]->name;
+                                    echo '<li class="list-group-item"><a href="./topic.php?='.$topicID.'" class="list-group__link">'.$topicName.'</a></li>';
+                                }
+                                ?>
+                                <!-- <li class="list-group-item"><a href="./topic.php" class="list-group__link">Topic</a></li>
                                 <li class="list-group-item"><a href="./topic.php" class="list-group__link">Topic</a></li>
                                 <li class="list-group-item"><a href="./topic.php" class="list-group__link">Topic</a></li>
                                 <li class="list-group-item"><a href="./topic.php" class="list-group__link">Topic</a></li>
-                                <li class="list-group-item"><a href="./topic.php" class="list-group__link">Topic</a></li>
-                                <li class="list-group-item"><a href="./topic.php" class="list-group__link">Topic</a></li>
+                                <li class="list-group-item"><a href="./topic.php" class="list-group__link">Topic</a></li> -->
                             </ul>
                         </div>
                     </div>
@@ -47,7 +72,7 @@
                             if(isset($_SESSION['isLoggedIn'])){
                                 include './forms/newTopic.php'; 
                             } else { 
-                                echo '<h2 class="header">Sign in to kick off a new topic!</h2>';
+                                echo '<h2 class="header">Sign in to kick off a new topic! 🏈</h2>';
                             }
                             ?>
                         </div>

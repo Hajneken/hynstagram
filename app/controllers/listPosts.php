@@ -38,5 +38,6 @@ foreach(getTopic($topicName)){
                 </div>
             </div>
         </div>';
+}
 
 ?>
