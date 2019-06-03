@@ -8,7 +8,7 @@
                         <?php include './forms/newUser.php' ?>
                     </div>
                 </div>
-                <div class="col-12 col-lg-2">
+                <div class="col-2 d-none d-md-block">
                     <div class="divider">
                         <p class="divider__text">or</p>
                     </div>

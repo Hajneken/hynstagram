@@ -8,6 +8,10 @@
                             echo '<div class="alert alert-success" role="alert">'.$_SESSION['successMessage'].'</div>';
                             unset($_SESSION['successMessage']);
                         }
+                        if (isset($_SESSION['errorMessage'])) {
+                            echo '<div class="alert alert-danger" role="alert"><h3 class="subheader">Dang! 😢</h3>' . $_SESSION['errorMessage'] . '</div>';
+                            unset($_SESSION['errorMessage']);
+                        }
                         ?>
                         <h1 class="title text-center">Hynstagram</h1>
                     </div>

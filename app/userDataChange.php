@@ -3,15 +3,23 @@ include './controllers/userController.php'
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<?php include './include/head.php' ?>
+<?php
 
-<body>
-    <?php include './include/nav.php' ?>
-    <?php include './pages/userDataChange.php' ?>
-    <?php include './include/footer.php' ?>
-    <?php include './include/scripts.php' ?>
-</body>
+if(isset($_SESSION['userID'])){
+    echo '<!DOCTYPE html>
+    <html lang="en">';
+    include './include/head.php';
+    echo '<body>';
+    include './include/nav.php';
+    include './pages/userDataChange.php';
+    include './include/footer.php';
+    include './include/scripts.php';
+    
+    echo '</body></html>';
+} else {
+    $_SESSION['errorMessage'] .= 'You need to sign in first sir! ❌<br><hr>';
+            header("location:./index.php");
+            exit();
+}
 
-</html>
+?>
