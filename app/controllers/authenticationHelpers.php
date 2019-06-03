@@ -19,3 +19,11 @@ function sessionSetter($user){
         $_SESSION[$propName] = $propValue;
     }
 }
+
+function saveValuesToSession($postVariable){
+    foreach ($postVariable as $key => $value) {
+        $_SESSION[$key] = $value;
+    }
+}
+
+?>

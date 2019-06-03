@@ -2,7 +2,7 @@
             <h2>Password change</h2>
             <div class="form-group">
                 <label for="<?php echo $dbKey ?>">Current Password</label>
-                <input type="email" class="form-control" id="<?php echo $dbKey ?>" aria-describedby="Current password" placeholder="Enter your current password...">
+                <input type="email" class="form-control" id="<?php echo $dbKey ?>" aria-describedby="Current password" placeholder="Enter your current password..." >
             </div>
             <div class="form-group">
                 <label for="<?php echo $dbKey ?>">New Password</label>

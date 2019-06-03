@@ -9,12 +9,16 @@
     ?>
     <div class="form-group">
         <label for="newUserEmail">Email address *</label>
-        <input type="email" class="form-control" name="newUserEmail" id="newUserEmail" aria-describedby="Email address" placeholder="Enter your email ..." required>
+        <input type="email" class="form-control" name="newUserEmail" id="newUserEmail" aria-describedby="Email address" placeholder="Enter your email ..." value="<?php if(isset($_SESSION['newUserEmail'])){
+            echo htmlspecialchars($_SESSION['newUserEmail']);
+        }?>" required>
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
         <label for="newUserNickname">Nickname</label>
-        <input type="text" class="form-control" name="newUserNickname" id="newUserNickname" placeholder="Nickname">
+        <input type="text" class="form-control" name="newUserNickname" id="newUserNickname" placeholder="Nickname" value="<?php if(isset($_SESSION['newUserNickname'])){
+            echo htmlspecialchars($_SESSION['newUserNickname']);
+        }?>">
     </div>
     <div class="form-group">
         <label for="newUserPassword">Password *</label>
@@ -22,7 +26,7 @@
     </div>
     <div class="form-group">
         <label for="passwordCheck">Password one more time *</label>
-        <input type="password" class="form-control" name="passwordCheck" id="passwordCheck" placeholder="Just to make sure ..." required>
+        <input type="password" class="form-control" name="passwordCheck" id="passwordCheck" placeholder="Just to make sure ..." required >
     </div>
     <div class="form-group form-check">
         <input type="checkbox" class="form-check-input" name="exampleCheck" id="funCheck" required>

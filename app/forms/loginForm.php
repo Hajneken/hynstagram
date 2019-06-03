@@ -10,7 +10,9 @@
     ?>
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" name="userEmail" id="userEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
+        <input type="email" class="form-control" name="userEmail" id="userEmail" aria-describedby="emailHelp" placeholder="Enter email" required value="<?php if(isset($_SESSION['userEmail'])){
+            echo htmlspecialchars($_SESSION['userEmail']);
+        }?>">
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Password</label>

@@ -17,8 +17,6 @@ function dbCheck(PDO $db, $email)
     return $user;
 }
 
-
-
 // select password from user with id
 // https://php.net/manual/en/function.password-verify.php
 function checkPassword($pswd, $dbObj)
@@ -55,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
         
     }
+    saveValuesToSession($_POST);
     $_SESSION['errorMessageLogIn'] .= 'Invalid combination! 🤯<br><hr>';
     header("location:../sign.php");
     exit();

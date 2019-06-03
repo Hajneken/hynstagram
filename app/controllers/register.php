@@ -78,6 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header("location:../index.php");
         exit();
     } else {
+        saveValuesToSession($_POST);
+        
         $_SESSION['errorMessage'] .= '💔 Dare to try again? 💪';
         header("location:../sign.php");
         exit();
