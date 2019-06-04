@@ -5,8 +5,8 @@ require './authenticationHelpers.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $to = 'zemanech@seznam.cz';
-    $subject = 'Hynstagram: Message from'.stringCleaner($_POST['strangerEmail']);
+    $to = 'zemh02@vse.cz';
+    $subject = 'Hynstagram: Message from '.stringCleaner($_POST['strangerEmail']);
     $message = stringCleaner($_POST['strangerMessage']);
     
     $headers = 'From: '.$_POST['strangerEmail'].' <'.$_POST['strangerEmail'].'>'."\r\n" .

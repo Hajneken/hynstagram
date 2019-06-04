@@ -1,5 +1,10 @@
 <?php
-include './controllers/userController.php'
+include './controllers/userController.php';
+
+if(isset($_SESSION['currentPage'])){
+    unset($_SESSION['currentPage']);
+}
+$_SESSION['currentPage'] = 'Sign Up / Log In';
 
 ?>
 

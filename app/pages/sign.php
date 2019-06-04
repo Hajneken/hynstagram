@@ -1,5 +1,4 @@
 <main class="main-container">
-
     <section class="section">
         <div class="container">
             <div class="row">

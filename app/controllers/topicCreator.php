@@ -56,11 +56,14 @@ function fetchInsertedTopicObj(PDO $db, $name){
     return $topicObj;
 }
 
-// returns new folder path
-function createTopicDirectory($name){
+// returns new folder path 
+function createTopicDirectory($name, $topicId){
+    $url = '../topics/topic_'.urlencode($name).'_id_'.$topicId;
     // create directory
-    if(mkdir('../topics/topic_'.$name, 0777, true)){
-        return './topics/topic_'.$name.'/';
+    if(mkdir($url, 0777, true)){
+        chmod('../topics', 0777);
+        chmod($url, 0777);
+        return $url;
     }
     // MIGHT MAKE PROBLEMS
     sessionMessage(false, 'Unable to create a folder!', 'topic.php');
@@ -102,15 +105,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header("location:../index.php");
         exit();
     }
+    
+    if(strlen($topicName)>500){
+        $_SESSION['errorMessage'] .= 'We sure do love great books, but for the sake of convenience, try to be more brief and let\'s make it fewer than 500 characters! 📚<br><hr>';
+        header("location:../index.php");
+        exit();
+    }
 
     if ($isPublic === '1') {
         insertTopicInDb($db, stringCleaner($topicName), stringCleaner($topicDescription), 1);
     }
     insertTopicInDb($db, stringCleaner($topicName), stringCleaner($topicDescription), 0);
     
-    $dir = createTopicDirectory(stringCleaner($topicName));
+    // refresh currentTopicId
+    if (isset($_SESSION['currentTopicId'])){
+        unset($_SESSION['currentTopicId']);
+    }
     
     $_SESSION['currentTopicId'] = fetchInsertedTopicObj($db, $topicName)->topicID;
+    
+    $dir = createTopicDirectory(stringCleaner($topicName),$_SESSION['currentTopicId']);
 }
 
 // current topic 🤘 won't work if first time

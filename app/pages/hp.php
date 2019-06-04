@@ -11,6 +11,7 @@ function fetchAllRelevantPosts(PDO $db){
 }
 
 $topicsArray = fetchAllRelevantPosts($db);
+
 ?>
 
 <main class="main-container">
@@ -49,13 +50,13 @@ $topicsArray = fetchAllRelevantPosts($db);
                             <h2 class="header">Trending topics</h2>
                             <ul class="list-group">
                                 <?php 
-                                
-                                foreach($topicsArray as $key){
-                                    $topicID = $topicsArray[$key]['topicID'];
-                                    $topicName = $topicsArray[$key]['name'];
-                                    // $topicID = $topicsArray[$key]->topicID;
-                                    // $topicName = $topicsArray[$key]->name;
-                                    echo '<li class="list-group-item"><a href="./topic.php?='.$topicID.'" class="list-group__link">'.$topicName.'</a></li>';
+                                // var_dump($topicsArray);
+                                // echo (count($topicsArray));
+                                for ($i=0; $i < count($topicsArray); $i++) { 
+                                    $topicID = $topicsArray[$i]['topicID'];
+                                    $topicName = $topicsArray[$i]['name'];
+                                    
+                                    echo '<li class="list-group-item"><a href="./topic.php?id='.$topicID.'" class="list-group__link">'.$topicName.'</a></li>';
                                 }
                                 ?>
                                 <!-- <li class="list-group-item"><a href="./topic.php" class="list-group__link">Topic</a></li>

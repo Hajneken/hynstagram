@@ -1,17 +1,10 @@
 <?php
-include './controllers/userController.php'
-//  PDO database connection
+include './controllers/userController.php';
 
-//  1. Check if user is signed in
-// yes => show Profile($Name) + Sign Off + Form Create New
-
-// no => show Sign In / Register + Form Sign In to Create New
-
-
-//  2. Check if Topics Exist
-//  yes => list 5 of top
-
-// 3. Check if 
+if(isset($_SESSION['currentPage'])){
+    unset($_SESSION['currentPage']);
+}
+$_SESSION['currentPage'] = 'Topic';
 
 ?>
 

@@ -20,48 +20,72 @@ function insertPostInDb(PDO $db, $url, $topicId, $authorId){
 
 // returns object representation of inserted post
 function fetchInsertedPostObj(PDO $db, $url){
-    $query = $db->prepare('SELECT * FROM Topics WHERE url=:url LIMIT 1;');
+    $query = $db->prepare('SELECT * FROM Posts WHERE url=:url LIMIT 1;');
     $query->execute([':url' => $url]);
     $topicObj = $query->fetchObject();
     return $topicObj;
 }
 
 // returns URL of the saved image
-function createPostUrl($currentTopicName, $file){
-    return './topics/topic_'.$currentTopicName.'/'.$file;
+function createPostUrl($currentTopicName, $fileName){
+    return '../topics/topic_'.urlencode($currentTopicName).'_id_'.$_SESSION['currentTopicId'].'/'.$fileName;
 }
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $dbObj;
+function createPostUrltoDB($currentTopicName, $fileName){
+    return './topics/topic_'.urlencode($currentTopicName).'_id_'.$_SESSION['currentTopicId'].'/'.$fileName;
+}
+
+
+// debug
+    // $_SESSION['errorMessage'] .= $_SESSION['currentTopicName'].' <br><hr>';
+    // header("location:./index.php");
+    // exit();
     
-    $postUrl = createPostUrl($_SESSION['currentTopicName'], $_FILES["myFile"]['name']);
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES["myFile"]) ){
     
-    //  upload img <to></to> it's place on server 
-    $isUploaded = move_uploaded_file($_FILES["myFile"]["tmp_name"], $postUrl);
+    $tempFile = $_FILES["myFile"]["tmp_name"];
+    $fileName = $_FILES["myFile"]['name'];
     
-    if ($isUploaded) {
+    // fixing problem with url
+    // should return
+    //  $_FILES["myFile"]["tmp_name"],'../topics/.'.$fileName.'/'.$_FILES["myFile"]['name']
+    $postUrl = createPostUrl($_SESSION['currentTopicName'], $fileName);
+    
+    $postUrlDb = createPostUrltoDB($_SESSION['currentTopicName'], $fileName);
+    
+        // $_SESSION['errorMessage'] .= $postUrl.' <br><hr>';
+        // header("location:./index.php");
+        // exit();
         
-        $postUrl = createPostUrl($_SESSION['currentTopicName'], $_FILES["myFile"]['name']);
-        
+    //  upload img to it's directory on server 
+    // move_uploaded_file($tempFile , $postUrl);
+    // 🚩🚩🚩🚩
+    
+    if (move_uploaded_file($tempFile , $postUrl)) {
         // inserting in db ...
-        insertPostInDb($db, $postUrl, $_SESSION['currentTopicId'], $_SESSION['userID']);
+        insertPostInDb($db, $postUrlDb, $_SESSION['currentTopicId'], $_SESSION['userID']);
         
         // $_SESSION['newPost'] = $_FILES["myFile"]['name'];
-        $dbObj = fetchInsertedPostObj($db, $postUrl);
+        $dbObj = fetchInsertedPostObj($db, $postUrlDb);
         
         $_SESSION['currentPostId'] = $dbObj->postID;
         
         // file uploaded succeeded
-        sessionMessage(true, 'nice!', 'topic.php');
+        // sessionMessage(true, 'nice!', 'topic.php');
         $_SESSION['successMessage'] .= 'Nice job! 🚀'.'<br><hr>';
-        header('location:../topic.php?='.$_SESSION['currentTopicId']);
+        
+        header('location:../topic.php?id='.$_SESSION['currentTopicId']);
+        exit();
+      } else {
+        $_SESSION['errorMessage'] .= 'Sorry our fault 😐, please try to upload your image again 🙃 <br><hr>';
+        header('location:../topic.php?id='.$_SESSION['currentTopicId']);
+        exit();
       }
-      
       
 }
 
 // TODO display posts
-
-header('location:./topic.php');
+$_SESSION['errorMessage'] .= 'Upload image first, would you? 😝 <br><hr>';
+header('location:../topic.php?id='.$_SESSION['currentTopicId']);
 
 ?>

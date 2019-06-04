@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $modified = $_SESSION['modify'];
         // session_destroy();
         sessionSetter($user);
-        $_SESSION['successMessage'] .= 'Your '. $modified.' was changed! ✅ <br><hr> Changes will be available after next login.';
+        $_SESSION['successMessage'] .= 'Your '. $modified.' was changed! ✅ <br><hr>';
         header("location:../profile.php");
         exit();
     }
