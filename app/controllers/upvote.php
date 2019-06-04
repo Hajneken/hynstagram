@@ -5,13 +5,20 @@ require './authenticationHelpers.php';
 
 session_start();
 
-
 $postId = $_GET['id'];
+
 $topicID = $_SESSION['currentTopicId'];
+
+if(isset($_SESSION['voted'.$postId])){
+    $_SESSION['errorMessage'] .= 'Although we don\'t have anything against alternative forms of government, you still get only one vote per post.';
+    header('location:../topic.php?id='.$topicID);
+    exit();
+}
+$_SESSION['voted'.$postId] = $postId;
 
 if(!isset($_SESSION['userID'])){
     $_SESSION['errorMessage'] .= 'Only <a href="./sign.php">registered</a> users can vote 😯';
-    header('location:./../topic.php?id='.$topicID);
+    header('location:../topic.php?id='.$topicID);
     exit();
 }
 

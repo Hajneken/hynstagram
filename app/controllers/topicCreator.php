@@ -23,17 +23,6 @@ include "./controllers/userController.php"
 
 </html>';
 
-// $test = stringCleaner(include '../topic.php');
-
-// // debug($variable, $header);
-
-// $_SESSION['errorMessage'] .= $test;
-// header('location:./index.php');
-    
-// exit();
-
-
-
 function insertTopicInDb(PDO $db, $name, $desctiption, $isPublic)
 {
     $query = $db->prepare('INSERT into Topics(name, description, isPublic, author) VALUES(:name, :description, :isPublic, :author)');
@@ -43,10 +32,6 @@ function insertTopicInDb(PDO $db, $name, $desctiption, $isPublic)
         ':isPublic' => $isPublic,
         ':author' => $_SESSION['userID']
     ]);
-    // DOES NOT WORK!!!!
-    // $dbObj = $query->fetchObject();
-    // $_SESSION['currentTopicId'] = $dbObj->topicId;  
-    // $_SESSION['currentTopicName'] = $dbObj->name;
 }
 
 function fetchInsertedTopicObj(PDO $db, $name){
@@ -100,17 +85,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $topicDescription = stringCleaner($_POST['topicDescription']);
     $isPublic = stringCleaner($_POST['isPublic']);
     
+    if(strlen($topicName)>500){
+        $_SESSION['errorMessage'] .= 'We sure do love great books, but for the sake of convenience, try to be more brief and let\'s make it fewer than 500 characters! 📚<br><hr>';
+        header("location:../index.php");
+        exit();
+    }
+    
     if (checkForDuplicateTopic($db, $topicName)) {
         $_SESSION['errorMessage'] .= 'Sombody was faster than you, a topic '.$topicName.' already exists!<br><hr>';
         header("location:../index.php");
         exit();
     }
     
-    if(strlen($topicName)>500){
-        $_SESSION['errorMessage'] .= 'We sure do love great books, but for the sake of convenience, try to be more brief and let\'s make it fewer than 500 characters! 📚<br><hr>';
-        header("location:../index.php");
-        exit();
-    }
 
     if ($isPublic === '1') {
         insertTopicInDb($db, stringCleaner($topicName), stringCleaner($topicDescription), 1);
