@@ -49,10 +49,10 @@ if (!isset($_GET['id']) || !$topicObj) {
             <div class="row">
                 <div class="col-4">
                     <h1 class="title text-center"><?php
-                                                    echo $topicObj->name; ?></h1>
+                                                    echo htmlspecialchars($topicObj->name); ?></h1>
                 </div>
                 <div class="col-8">
-                    <p class="text"><?php echo $topicObj->description; ?></p>
+                    <p class="text"><?php echo htmlspecialchars($topicObj->description); ?></p>
                 </div>
             </div>
             <div class="row">

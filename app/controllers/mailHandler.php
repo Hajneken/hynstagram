@@ -20,12 +20,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
     
     if (!filter_var($_POST['strangerEmail'], FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['errorStrangerMail'] = $_POST['strangerEmail'];
+        $_SESSION['errorStrangerMessage'] = $_POST['strangerMessage'];
         $_SESSION['errorMessageMail'] .= 'This does not look like an email address! 📧 <br><hr>';
         header("location:../index.php");
         exit();
     }
     
     if(!isset($_POST['strangerMessage'])){
+        $_SESSION['errorStrangerMail'] = $_POST['strangerEmail'];
+        $_SESSION['errorStrangerMessage'] = $_POST['strangerMessage'];
         $_SESSION['errorMessageMail'] .= 'Sometimes silent communication is worth a thousand words, but we would really like to hear your opinion this time!<br><hr>';
         header("location:../index.php");
         exit();

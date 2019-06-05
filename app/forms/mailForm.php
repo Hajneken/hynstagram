@@ -12,12 +12,22 @@ if (isset($_SESSION['successMessageMail'])) {
 <form class="form" method="post" action="./controllers/mailHandler.php">
     <div class="form-group">
         <label class="text-white" for="strangerEmail">Email</label>
-        <input type="email" class="form-control" name="strangerEmail" id="strangerEmail" aria-describedby="Your email address..." placeholder="Enter your email..." required>
+        <input type="email" class="form-control" name="strangerEmail" id="strangerEmail" aria-describedby="Your email address..." placeholder="Enter your email..." value="<?php  
+        if(isset($_SESSION['errorStrangerMail'])){
+            echo htmlspecialchars($_SESSION['errorStrangerMail']);
+            unset($_SESSION['errorStrangerMail']);
+        }
+         ?>" required>
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
         <label class="text-white" for="strangerMessage">Your message</label>
-        <textarea class="form-control" name="strangerMessage" id="strangerMessage" rows="3" placeholder="Share your thoughts with us ..." required></textarea>
+        <textarea class="form-control" name="strangerMessage" id="strangerMessage" rows="3" placeholder="Share your thoughts with us ..." required><?php  
+        if(isset($_SESSION['errorStrangerMessage'])){
+            echo htmlspecialchars($_SESSION['errorStrangerMessage']);
+            unset($_SESSION['errorStrangerMessage']);
+        }
+         ?></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Send</button>
 </form>

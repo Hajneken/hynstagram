@@ -4,9 +4,31 @@ Web app where only images are a valid way of communication.
 
 (I may or may not have been slighlty inspired with the name elsewhere).
 
-## Motivation 
+This fun little project has been written as a requirement for the course 4iz278 - Web Applications at Prague School of Economics .
 
-This fun little project has been written as a requirement for the course 4iz278 - Web Applications.
+
+## Getting started (Development)
+
+1) install *yarn*
+2) run `yarn` in project's root
+3) run `gulp watch` to build your css and serve files
+4) 🎉 you are set up 🎉
+
+## Just want to run the app?
+
+All magic happens within `/app`, you don't need anything else
+
+1) copy contents of `/app` to server
+2) Create 3 tables in MySQL database
+   1)  **Users**
+   2)  **Topics** 
+   3)  **Posts**
+3) You're set up
+    
+> message me for further details regarding the database
+
+
+---
 
 ## Technologies 
 
@@ -16,7 +38,6 @@ The logic of the app is written mainly in PHP, using MySQL database as a storage
 
 - PHP 
 - MySQL 
-- ES6
 
 ### Tools 
 
@@ -27,11 +48,5 @@ Front-end tools:
 
 Server simulated with *browser-sync*
 
-Also using `yarn` as a package manager
+Also using `yarn` as a package manager (🏎)
 
-## Start project
-
-1) install *yarn*
-2) run `yarn` in your root directory
-3) run `gulp watch` to serve your files 
-4) 🎉 you are set up 🎉

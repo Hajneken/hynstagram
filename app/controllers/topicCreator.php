@@ -85,13 +85,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $topicDescription = stringCleaner($_POST['topicDescription']);
     $isPublic = stringCleaner($_POST['isPublic']);
     
-    if(strlen($topicName)>500){
+    if(strlen($topicDescription)>500){
         $_SESSION['errorMessage'] .= 'We sure do love great books, but for the sake of convenience, try to be more brief and let\'s make it fewer than 500 characters! 📚<br><hr>';
         header("location:../index.php");
         exit();
     }
     
     if (checkForDuplicateTopic($db, $topicName)) {
+        $_SESSION['errorTopicName'] = $topicName;
+        $_SESSION['errorTopicDescription'] = $topicDescription;
         $_SESSION['errorMessage'] .= 'Sombody was faster than you, a topic '.$topicName.' already exists!<br><hr>';
         header("location:../index.php");
         exit();
@@ -99,9 +101,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
 
     if ($isPublic === '1') {
-        insertTopicInDb($db, stringCleaner($topicName), stringCleaner($topicDescription), 1);
+        insertTopicInDb($db, $topicName, stringCleaner($topicDescription), 1);
     }
-    insertTopicInDb($db, stringCleaner($topicName), stringCleaner($topicDescription), 0);
+    insertTopicInDb($db, $topicName, stringCleaner($topicDescription), 0);
     
     // refresh currentTopicId
     if (isset($_SESSION['currentTopicId'])){
@@ -110,13 +112,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     $_SESSION['currentTopicId'] = fetchInsertedTopicObj($db, $topicName)->topicID;
     
-    $dir = createTopicDirectory(stringCleaner($topicName),$_SESSION['currentTopicId']);
+    $dir = createTopicDirectory($topicName,$_SESSION['currentTopicId']);
 }
 
 // current topic 🤘 won't work if first time
 $newTopicUrl = './topic.php?id='.$_SESSION['currentTopicId'];
 
-$_SESSION['successMessage'] .= 'Your new topic named '.stringCleaner($topicName).' was born 👶. Check it out <a href="'.$newTopicUrl.'">Here</a>!';
+$_SESSION['successMessage'] .= 'Your new topic named '.htmlspecialchars($topicName).' was born 👶. Check it out <a href="'.$newTopicUrl.'">Here</a>!';
 
 header("location:../index.php");
 exit();
