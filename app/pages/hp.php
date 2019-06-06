@@ -4,14 +4,32 @@ require './db/connectDb.php';
 
 function fetchAllRelevantPosts(PDO $db)
 {
+    // HERE
     // to do ORDER BY `votes`
-    $query = $db->prepare('SELECT * FROM Topics LIMIT 5;');
+    
+    // $query = $db->prepare('SELECT * FROM Topics LIMIT 5;');
+    // $query->execute();
+    // $topicsArray = $query->fetchAll();
+    // return $topicsArray;
+    
+    // alternative
+    
+    $query = $db->prepare('SELECT topic, topicID, name, sum(`votes`) as votesSum
+    FROM Posts
+    JOIN Topics 
+    ON  `topic` = `topicID`
+    GROUP BY name, topic
+    ORDER BY votesSum
+    DESC
+    LIMIT 5;');
     $query->execute();
     $topicsArray = $query->fetchAll();
     return $topicsArray;
 }
-
+// HERE
 $topicsArray = fetchAllRelevantPosts($db);
+
+// $topicsObj = fetchAllRelevantPosts($db);
 
 ?>
 
@@ -59,6 +77,7 @@ $topicsArray = fetchAllRelevantPosts($db);
 
                                 echo '<li class="list-group-item"><a href="./topic.php?id=' . $topicID . '" class="list-group__link">' . $topicName . '</a></li>';
                             }
+                            // var_dump($topicsObj);
                             ?>
                         </ul>
                     </div>
