@@ -30,6 +30,12 @@ function fetchCurrentTopicObj(PDO $db, $topicId)
 $postsArray = fetchAllRelevantPosts($db, $_SESSION['currentTopicId']);
 $topicObj = fetchCurrentTopicObj($db, $_SESSION['currentTopicId']);
 
+if($topicObj->isPublic === "0" && !isset($_SESSION['userID'])){
+    $_SESSION['errorMessage'] .= 'Sorry the topic you are trying to access requires membership. <br><hr>';
+    header("location:./index.php");
+    exit();
+}
+
 $_SESSION['currentTopicName'] = $topicObj->name;
 
 if (!isset($_GET['id']) || !$topicObj) {

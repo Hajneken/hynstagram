@@ -4,10 +4,9 @@ include './controllers/userController.php';
 if(isset($_SESSION['currentPage'])){
     unset($_SESSION['currentPage']);
 }
-$_SESSION['currentPage'] = 'Topic';
+$_SESSION['currentPage'] = 'List of topics';
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +14,7 @@ $_SESSION['currentPage'] = 'Topic';
 
 <body>
     <?php include './include/nav.php' ?>
-    <?php include './pages/topic.php' ?>
+    <?php include './pages/topics.php' ?>
     <?php include './include/footer.php' ?>
     <?php include './include/scripts.php' ?>
 </body>

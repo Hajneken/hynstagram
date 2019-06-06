@@ -96,4 +96,16 @@ $topicsArray = fetchAllRelevantPosts($db);
             </div>
         </div>
     </section>
+    
+    <section class="section-container mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="wrapper d-flex justify-content-center">
+                    <a href="./topicList.php" class="btn btn-primary">Show me all topics</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
