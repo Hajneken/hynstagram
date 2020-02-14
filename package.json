@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "bootstrap": "4.3.1",
-    "yarn": "^1.16.0"
+    "yarn": "^1.22.0"
   },
   "name": "hynstagram",
   "version": "1.0.0",
